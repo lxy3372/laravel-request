@@ -1,0 +1,24 @@
+{
+  "name": "riky/laravel-request",
+  "description": "inject request object for laravel",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "riky",
+      "email": "lxy3372@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "autoload": {
+    "classmap": [
+      "database"
+    ],
+    "psr-4": {
+      "Riky\\Request\\": "src/"
+    }
+  },
+  "minimum-stability": "dev",
+}
