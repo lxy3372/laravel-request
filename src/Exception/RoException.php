@@ -1,23 +1,30 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: zhangsir
- * Date: 16-10-28
- * Time: 下午2:13
- */
 
-namespace Riky\Exceptions;
+namespace Riky\Exception;
 
-use Exception;
+use Riky\Exception\ErrorCode\RoError;
 
 /**
- * 业务自定义异常类
- *
- * Class BaseException
- *
- * @package App\Exceptions
+ * Class RoException
  */
-class RoException extends Exception
+class RoException extends BaseException
 {
+    public $attribute;
 
+    protected $lang_filename = 'ro_error.';
+
+
+
+    public function __construct($code, array $value = [], $attribute = '', \Exception $exception = null)
+    {
+        $this->attribute = $attribute;
+        $notice = ['NOTICE' => ''];
+	    $notice['NOTICE'] = ','.$value['field'].RoError::RO_ERROR_NOTICE[$code].(empty($value['value']) ? '' : $value['value']);
+        parent::__construct($code, $notice);
+    }
+
+    public function getAttribute()
+    {
+        return $this->attribute;
+    }
 }

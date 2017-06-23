@@ -2,7 +2,8 @@
 
 namespace Riky\Util;
 
-Use Riky\Exceptions\RoException;
+Use Riky\Exception\RoException;
+Use Riky\Exception\ErrorCode\RoError;
 
 
 /**
@@ -10,7 +11,6 @@ Use Riky\Exceptions\RoException;
  * 
  * Class VerifyRoUtil
  *
- * @package Riky\Util
  */
 class VerifyRoUtil
 {

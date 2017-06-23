@@ -5,7 +5,8 @@ namespace Riky\Requests;
 use ReflectionClass;
 use ReflectionProperty;
 use Riky\Util\VerifyRoUtil;
-use Riky\Exceptions\RoException;
+use Riky\Exception\RoException;
+use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
 /**
  * Request Object
@@ -31,9 +32,13 @@ Class BaseRo
 	 */
     function __construct($request = array())
     {
+	    //support for laravel
         if (function_exists('app')) {
             $params = app()->request->all();
             $request = array_merge($params, $request);
+        } else {
+	        $request_obj = new SymfonyRequest();
+	        $request = $request_obj->createFromGlobals()->request->all();
         }
         $this->inject($request);
         $this->before();
@@ -134,6 +139,5 @@ Class BaseRo
     {
 
     }
-
 
 }
