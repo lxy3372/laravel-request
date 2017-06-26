@@ -14,9 +14,6 @@
     "php": ">=5.4.0"
   },
   "autoload": {
-    "classmap": [
-      "database"
-    ],
     "psr-4": {
       "Riky\\Request\\": "src/Request/",
       "Riky\\Util\\": "src/Util/",
