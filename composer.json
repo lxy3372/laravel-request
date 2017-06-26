@@ -15,9 +15,9 @@
   },
   "autoload": {
     "psr-4": {
-      "Riky\\Request\\": "src/Request/",
-      "Riky\\Util\\": "src/Util/",
-      "Riky\\Exception\\": "src/Exception/"
+      "Riky\\Requests\\": "src/Requests/",
+      "Riky\\Utils\\": "src/Utils/",
+      "Riky\\Exceptions\\": "src/Exceptions/"
     }
   },
   "minimum-stability": "dev"

@@ -1,6 +1,6 @@
 <?php
 
-namespace Riky\Exception\ErrorCode;
+namespace Riky\Exceptions\ErrorCode;
 
 /**
  * Class RoError template

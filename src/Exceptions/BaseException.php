@@ -1,6 +1,6 @@
 <?php
 
-namespace Riky\Exception;
+namespace Riky\Exceptions;
 
 use Exception;
 

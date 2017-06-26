@@ -1,8 +1,8 @@
 <?php
 
-namespace Riky\Exception;
+namespace Riky\Exceptions;
 
-use Riky\Exception\ErrorCode\RoError;
+use Riky\Exceptions\ErrorCode\RoError;
 
 /**
  * Class RoException

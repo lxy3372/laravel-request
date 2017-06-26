@@ -1,6 +1,6 @@
 <?php
 
-namespace Riky\Util;
+namespace Riky\Utils;
 
 Use Riky\Exception\RoException;
 Use Riky\Exception\ErrorCode\RoError;
