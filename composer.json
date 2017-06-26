@@ -1,7 +1,8 @@
 {
   "name": "riky/laravel-request",
   "description": "inject request object for laravel",
-  "type": "project",
+  "version":"0.1.0",
+  "type": "library",
   "license": "MIT",
   "authors": [
     {
@@ -10,8 +11,7 @@
     }
   ],
   "require": {
-    "php": ">=5.4.0",
-    "symfony/http-foundation": "3.1.*"
+    "php": ">=5.4.0"
   },
   "autoload": {
     "classmap": [
