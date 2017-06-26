@@ -23,8 +23,16 @@ Class BaseRo
     public $plat_form=1;
 
 
+	/**
+	 * 字段映射
+	 */
     protected $maps = [];
 
+	/**
+	 * 请求对象，方便扩展
+	 */
+	private $request_handler = null;
+	
 	/**
 	 * BaseRo constructor.
 	 *
@@ -33,13 +41,15 @@ Class BaseRo
     function __construct($request = array())
     {
 	    //support for laravel
-        if (function_exists('app')) {
+        if (function_exists('app') && app()->request) {
+	        $this->request_handler = app()->request;
             $params = app()->request->all();
-            $request = array_merge($params, $request);
         } else {
 	        $request_obj = new SymfonyRequest();
-	        $request = $request_obj->createFromGlobals()->request->all();
+	        $request_handler = $request_obj->createFromGlobals();
+	        $params = array_merge($request_handler->query->all(), $request_handler->request->all());
         }
+	    $request = array_merge($params, $request);
         $this->inject($request);
         $this->before();
         $this->checkAttr();
@@ -79,6 +89,7 @@ Class BaseRo
         $arr = [];
         foreach ($this as $key => $item) {
             if($unsetNull && !$item) continue;
+	        if($key == 'request_handler') continue;
             $arr[$key] = $item;
         }
 
