@@ -18,8 +18,8 @@
       "database"
     ],
     "psr-4": {
-      "Riky\\Request\\": "src/requests/",
-      "Riky\\Util\\": "src/util/",
+      "Riky\\Request\\": "src/Request/",
+      "Riky\\Util\\": "src/Util/",
       "Riky\\Exception\\": "src/Exception/"
     }
   },
