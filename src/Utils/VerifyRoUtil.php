@@ -2,8 +2,8 @@
 
 namespace Riky\Utils;
 
-Use Riky\Exception\RoException;
-Use Riky\Exception\ErrorCode\RoError;
+Use Riky\Exceptions\RoException;
+Use Riky\Exceptions\ErrorCode\RoError;
 
 
 /**
