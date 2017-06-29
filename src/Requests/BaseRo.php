@@ -17,17 +17,17 @@ use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 Class BaseRo
 {
 	/**
-	 * eg: 平台
+	 * eg: plat_form
 	 *
 	 * @required
-	 * @integer
-	 * @min|1
+	 * @integer||:attribute必须为整数
+	 * @max|3|:attribute最大为3
 	 */
 	public $plat_form;
 
 
 	/**
-	 * 字段映射
+	 * fields maps
 	 */
 	protected $maps = [];
 
@@ -68,7 +68,7 @@ Class BaseRo
 	 */
 	public function inject($request)
 	{
-		// 处理字段映射
+		// map to attribute
 		foreach ($this->maps as $key => $field) {
 			if (array_key_exists($key, $request)) {
 				$this->{$field} = $request[$key];
@@ -119,6 +119,7 @@ Class BaseRo
 		$properties = $class->getProperties(ReflectionProperty::IS_PUBLIC);
 		$params_arr = [];
 		$data_arr = [];
+		$err_arr = [];
 		$method_arr = ['accepted', 'active_url', 'after', 'alpha', 'alpha_dash', 'alpha_numeric', 'array', 'before (date)', 'between', 'boolean', 'confirmed', 'date', 'date_format', 'different', 'digits', 'digits_between', 'email', 'exists (database)', 'image (file)', 'in', 'integer', 'ip', 'json', 'max', 'mimes', 'min', 'not_in', 'numeric', 'regular', 'required', 'required_if', 'required_unless', 'required_with', 'required_with_all', 'required_without', 'required_without_all', 'same', 'size', 'string', 'timezone', 'unique', 'url'
 		];
 		foreach($properties as &$property) {
@@ -131,7 +132,7 @@ Class BaseRo
 				$line_arr = explode('@', $line);
 				if (count($line_arr) < 2) continue;
 				$match = explode(" ", $line_arr[1])[0];
-				@list($method, $param) = explode("|", $match);
+				@list($method, $param, $err) = explode("|", $match);
 				if(!in_array($method, $method_arr)) {
 					continue;
 				}
@@ -139,11 +140,14 @@ Class BaseRo
 				if($param) {
 					$rules .=':'.$param;
 				}
+				if($err) {
+					$err_arr[$name.'.'.$method] = $err;
+				}
 
 			}
 			$params_arr[$name] = $rules;
 		}
-		$ret = Validator::make($data_arr, $params_arr);
+		$ret = Validator::make($data_arr, $params_arr, $err_arr);
 		if($ret->fails()){
 			$this->handleException($ret->errors());
 		}
